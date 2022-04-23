@@ -16,12 +16,17 @@ pipeline {
                 }
             }
         }
+        stage('Sonar') {
+            steps {
+                echo 'Running Sonar....'
+            }
+        }
         stage('Snapshot') {
             when {
-                branch 'main'
+                branch 'PR**'
             }
             steps {
-                echo 'Releasing....'
+                echo 'Snapshoting....'
             }
         }
         stage('Release') {
