@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withMaven(name: 'maven3') {
+                withMaven(maven: 'maven3') {
                     sh "mvn clean verify"
                 }
             }
