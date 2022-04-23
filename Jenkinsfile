@@ -16,7 +16,26 @@ pipeline {
                 }
             }
         }
+        stage('Snapshot') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Releasing....'
+            }
+        }
+        stage('Release') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Releasing....'
+            }
+        }
         stage('Deploy') {
+            when {
+                branch 'main'
+            }
             steps {
                 echo 'Deploying....'
             }
