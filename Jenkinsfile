@@ -34,7 +34,9 @@ pipeline {
                 branch 'main'
             }
             steps {
-                echo 'Releasing....'
+                // Maven
+                // and/or
+                // Docker image
             }
         }
         stage('Deploy') {
@@ -42,6 +44,9 @@ pipeline {
                 branch 'main'
             }
             steps {
+                // Deploy artifact and run on digitalocean
+                // or
+                // Deploy docker image and run on digitalocean
                 echo 'Deploying....'
             }
         }
