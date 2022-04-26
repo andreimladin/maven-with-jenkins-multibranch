@@ -16,9 +16,33 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('Sonar') {
             steps {
-                echo 'Deploying....'
+                echo 'Running Sonar....'
+            }
+        }
+        stage('Snapshot') {
+            when {
+                branch 'PR**'
+            }
+            steps {
+                echo 'Snapshoting....'
+            }
+        }
+        stage('Release') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Releasing artifact or docker image ...'
+            }
+        }
+        stage('Deploy') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo 'Deploying artifact or docker image to digitalocean....'
             }
         }
     }
