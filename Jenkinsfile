@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 withMaven(maven: 'maven3') {
-                    sh "mvn clean verify -DskipTests"
+                    sh "mvn clean install -DskipTests"
                 }
             }
         }
@@ -43,7 +43,23 @@ pipeline {
             }
             steps {
                 echo 'Deploying artifact or docker image to digitalocean....'
+                # https://www.jenkins.io/doc/book/pipeline/docker/#custom-registry
+                docker.withRegistry('https://registry.example.com', 'credentials-id') {
+
+                        def customImage = docker.build("my-image:${env.BUILD_ID}")
+
+                        /* Push the container to the custom Registry */
+                        customImage.push()
+                    }
+
+
             }
+        }
+    }
+
+    post {
+        failure {
+            echo "Build failed"
         }
     }
 }
